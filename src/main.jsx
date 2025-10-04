@@ -1,12 +1,22 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
-
 import { createBrowserRouter, RouterProvider } from 'react-router';
+import AppLayout from './AppLayout';
+import './index.css';
+import Error from './pages/Error';
+import Home from './pages/Home';
+
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <h1 className='text-4xl bg-red-500'> Hello World</h1>,
+    Component: AppLayout,
+    errorElement: <Error />,
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+    ],
   },
 ]);
 
