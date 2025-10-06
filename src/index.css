@@ -2,3 +2,22 @@
 @plugin "daisyui" {
   themes: light --default, dark;
 }
+
+:root {
+  --font-inter: 'Inter', sans-serif;
+}
+
+@theme inline {
+  --breakpoint-xs: 30rem;
+
+  --default-font-family: var(--font-inter), var(--font-sans);
+
+  --color-primary: #23be0a;
+  --color-secondary: #59c6d2;
+}
+
+@layer components {
+  .active {
+    @apply rounded-md border border-primary px-3 py-1.5 text-primary font-bold;
+  }
+}
