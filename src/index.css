@@ -2,3 +2,15 @@
 @plugin "daisyui" {
   themes: light --default;
 }
+
+:root {
+  --font-inter: 'Inter', sans-serif;
+}
+
+@theme inline {
+  --default-font-family: var(--font-inter), var(--font-sans);
+}
+
+@utility heading-secondary {
+  @apply xl:text-3xl text-2xl font-semibold mb-2;
+}

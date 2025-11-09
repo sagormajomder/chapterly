@@ -58,8 +58,12 @@ export default function Navbar() {
           </div>
           {/* Navbar End */}
           <div className='navbar-end'>
-            <Link className='btn'>Register</Link>
-            <Link className='btn'>Login</Link>
+            <Link to='/auth/register' className='btn'>
+              Register
+            </Link>
+            <Link to='/auth/login' className='btn'>
+              Login
+            </Link>
           </div>
         </nav>
       </Container>
