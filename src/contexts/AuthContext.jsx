@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   updateProfile,
 } from 'firebase/auth';
@@ -18,6 +19,7 @@ function AuthProvider({ children }) {
 
   console.log(user);
 
+  // User Registration
   function createUser(email, password) {
     setIsLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -27,6 +29,11 @@ function AuthProvider({ children }) {
     return updateProfile(auth.currentUser, updateUserInfo);
   }
 
+  // User Login
+  function signInUser(email, password) {
+    setIsLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  }
   function googleLogin() {
     setIsLoading(true);
     return signInWithPopup(auth, googleProvider);
@@ -50,6 +57,7 @@ function AuthProvider({ children }) {
       value={{
         createUser,
         updateUserProfile,
+        signInUser,
         googleLogin,
         user,
         setUser,

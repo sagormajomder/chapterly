@@ -78,107 +78,110 @@ export default function RegistrationPage() {
   }
 
   return (
-    <section className='h-full py-14'>
-      <Container style='flex items-center justify-center px-4 h-full'>
-        <div className='flex flex-row bg-base-100 w-[90%] lg:w-[65%] md:w-[85%] sm:w-[65%]  shadow-2xl rounded-xl'>
-          <img
-            className='rounded-l-xl object-cover w-1/2 hidden md:block'
-            src='https://i.ibb.co.com/8LS5xxk0/islander-Ls0gs-I-AEb0-unsplash.jpg'
-            alt=''
-          />
+    <>
+      <title>Chapterly - User Registration </title>
+      <section className='h-full py-14'>
+        <Container style='flex items-center justify-center px-4 h-full'>
+          <div className='flex flex-row bg-base-100 w-[90%] lg:w-[65%] md:w-[85%] sm:w-[65%]  shadow-2xl rounded-xl'>
+            <img
+              className='rounded-l-xl object-cover w-1/2 hidden md:block'
+              src='https://i.ibb.co.com/pvwBMjdh/olena-bohovyk-Ft-Wn-K5-YH8-unsplash-1-1.jpg'
+              alt=''
+            />
 
-          <div className='card-body basis-1/2 self-center py-10'>
-            <form onSubmit={handleUserRegister}>
-              <h2 className='heading-secondary text-center mb-6'>
-                Open a New Chapter <br /> with Chapterly
-              </h2>
-              <fieldset className='fieldset'>
-                {/* Name */}
-                <label htmlFor='name' className='label'>
-                  Name
-                </label>
-                <input
-                  id='name'
-                  type='text'
-                  className='input w-full'
-                  placeholder='Name'
-                  value={displayName}
-                  onChange={e => setDisplayName(e.target.value)}
-                  required
-                />
-                {/* PhotoUrl */}
-                <label htmlFor='photo' className='label'>
-                  PhotoURL
-                </label>
-                <input
-                  id='photo'
-                  type='text'
-                  className='input w-full'
-                  placeholder='PhotoURL'
-                  value={photoURL}
-                  onChange={e => setPhotoURL(e.target.value)}
-                  required
-                />
-                {/* Email */}
-                <label htmlFor='email' className='label'>
-                  Email
-                </label>
-                <input
-                  id='email'
-                  type='email'
-                  className='input w-full'
-                  placeholder='Email'
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  required
-                />
-                {/* Password */}
-                <label htmlFor='pass' className='label'>
-                  Password
-                </label>
-                <div className='relative'>
+            <div className='card-body basis-1/2 self-center py-10'>
+              <form onSubmit={handleUserRegister}>
+                <h2 className='heading-secondary text-center mb-6'>
+                  Open a New Chapter <br /> with Chapterly
+                </h2>
+                <fieldset className='fieldset'>
+                  {/* Name */}
+                  <label htmlFor='name' className='label'>
+                    Name
+                  </label>
                   <input
-                    id='pass'
-                    type={showPassword ? 'text' : 'password'}
-                    className='input pr-10 w-full'
-                    placeholder='Password'
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    id='name'
+                    type='text'
+                    className='input w-full'
+                    placeholder='Name'
+                    value={displayName}
+                    onChange={e => setDisplayName(e.target.value)}
                     required
                   />
-                  {password.length > 0 && (
-                    <button
-                      type='button'
-                      onClick={() => setShowPassword(!showPassword)}
-                      className='absolute top-1/2 right-3 z-10 -translate-y-1/2 cursor-pointer text-xl'>
-                      {showPassword ? (
-                        <AiOutlineEyeInvisible />
-                      ) : (
-                        <AiOutlineEye />
-                      )}
-                    </button>
-                  )}
-                </div>
-                <p className='mt-1 text-gray-500 text-xs'>
-                  Password length must be at least 6 chararacter, must have both
-                  lower (a-z) and upper case letters (A-Z)
-                </p>
+                  {/* PhotoUrl */}
+                  <label htmlFor='photo' className='label'>
+                    PhotoURL
+                  </label>
+                  <input
+                    id='photo'
+                    type='text'
+                    className='input w-full'
+                    placeholder='PhotoURL'
+                    value={photoURL}
+                    onChange={e => setPhotoURL(e.target.value)}
+                    required
+                  />
+                  {/* Email */}
+                  <label htmlFor='email' className='label'>
+                    Email
+                  </label>
+                  <input
+                    id='email'
+                    type='email'
+                    className='input w-full'
+                    placeholder='Email'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                  />
+                  {/* Password */}
+                  <label htmlFor='pass' className='label'>
+                    Password
+                  </label>
+                  <div className='relative'>
+                    <input
+                      id='pass'
+                      type={showPassword ? 'text' : 'password'}
+                      className='input pr-10 w-full'
+                      placeholder='Password'
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
+                      required
+                    />
+                    {password.length > 0 && (
+                      <button
+                        type='button'
+                        onClick={() => setShowPassword(!showPassword)}
+                        className='absolute top-1/2 right-3 z-10 -translate-y-1/2 cursor-pointer text-xl'>
+                        {showPassword ? (
+                          <AiOutlineEyeInvisible />
+                        ) : (
+                          <AiOutlineEye />
+                        )}
+                      </button>
+                    )}
+                  </div>
+                  <p className='mt-1 text-gray-500 text-xs'>
+                    Password length must be at least 6 chararacter, must have
+                    both lower (a-z) and upper case letters (A-Z)
+                  </p>
 
-                <button className='btn btn-neutral mt-4'>Register</button>
-              </fieldset>
-            </form>
-            <div className='divider'>OR</div>
-            {/* Google */}
-            <GoogleLogin />
-            <p className='text-center text-xs'>
-              Already Have An Account?{' '}
-              <Link className='hover:underline' to='/auth/login'>
-                Login now
-              </Link>
-            </p>
+                  <button className='btn btn-neutral mt-4'>Register</button>
+                </fieldset>
+              </form>
+              <div className='divider'>OR</div>
+              {/* Google */}
+              <GoogleLogin />
+              <p className='text-center text-xs'>
+                Already Have An Account?{' '}
+                <Link className='hover:underline' to='/auth/login'>
+                  Login now
+                </Link>
+              </p>
+            </div>
           </div>
-        </div>
-      </Container>
-    </section>
+        </Container>
+      </section>
+    </>
   );
 }
