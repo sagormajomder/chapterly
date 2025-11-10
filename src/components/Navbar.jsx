@@ -64,7 +64,7 @@ export default function Navbar() {
                 tabIndex='-1'
                 className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow'>
                 {links}
-                <div className='flex flex-col gap-2   min-[26.875rem]:hidden'>
+                <div className='flex flex-col gap-2   min-[26.875rem]:hidden mt-2'>
                   {!user && (
                     <>
                       <Link
@@ -78,18 +78,18 @@ export default function Navbar() {
                     </>
                   )}
                   {user && (
-                    <>
+                    <div className='flex gap-3 min-[26.875rem]:hidden ml-2'>
                       <img
-                        className='rounded-full w-10 h-10 cursor-pointer'
+                        className='rounded-full w-10 h-10 cursor-pointer object-cover'
                         src={user.photoURL}
                         alt={user.displayName}
                       />
                       <button
                         onClick={handleLogOut}
-                        className='btn  btn-primary'>
+                        className='btn  btn-primary basis-4/6'>
                         LogOut
                       </button>
-                    </>
+                    </div>
                   )}
                 </div>
               </ul>
@@ -119,9 +119,10 @@ export default function Navbar() {
             {user && (
               <>
                 <img
-                  className='rounded-full w-10 h-10 cursor-pointer'
+                  className='rounded-full w-10 h-10 cursor-pointer object-cover'
                   src={user.photoURL}
                   alt={user.displayName}
+                  title={user.displayName}
                 />
                 <button onClick={handleLogOut} className='btn  btn-primary'>
                   LogOut
