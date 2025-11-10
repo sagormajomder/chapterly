@@ -1,7 +1,23 @@
+import toast from 'react-hot-toast';
 import { Link, NavLink } from 'react-router';
+import { useAuth } from '../contexts/AuthContext';
 import Container from './Container';
 
 export default function Navbar() {
+  const { signOutUser, user, setUser } = useAuth();
+
+  function handleLogOut() {
+    signOutUser()
+      .then(() => {
+        toast.success('User logout successful');
+        setUser(null);
+      })
+      .catch(error => {
+        // console.log(error);
+        toast.error(error.message);
+      });
+  }
+
   const links = (
     <>
       <li>
@@ -48,22 +64,70 @@ export default function Navbar() {
                 tabIndex='-1'
                 className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow'>
                 {links}
+                <div className='flex flex-col gap-2   min-[26.875rem]:hidden'>
+                  {!user && (
+                    <>
+                      <Link
+                        to='/auth/register'
+                        className='btn btn-outline border border-primary hover:bg-primary hover:text-primary-content'>
+                        Register
+                      </Link>
+                      <Link to='/auth/login' className='btn btn-primary'>
+                        Login
+                      </Link>
+                    </>
+                  )}
+                  {user && (
+                    <>
+                      <img
+                        className='rounded-full w-10 h-10 cursor-pointer'
+                        src={user.photoURL}
+                        alt={user.displayName}
+                      />
+                      <button
+                        onClick={handleLogOut}
+                        className='btn  btn-primary'>
+                        LogOut
+                      </button>
+                    </>
+                  )}
+                </div>
               </ul>
             </div>
-            <a className='btn btn-ghost text-xl'>daisyUI</a>
+            <Link to='/' className='text-2xl font-semibold'>
+              Chapter<span className='font-bold text-primary'>ly.</span>
+            </Link>
           </div>
           {/* Navbar Center */}
           <div className='navbar-center hidden lg:flex'>
             <ul className='menu menu-horizontal px-1'>{links}</ul>
           </div>
           {/* Navbar End */}
-          <div className='navbar-end'>
-            <Link to='/auth/register' className='btn'>
-              Register
-            </Link>
-            <Link to='/auth/login' className='btn'>
-              Login
-            </Link>
+          <div className='navbar-end gap-2 hidden  min-[26.875rem]:flex'>
+            {!user && (
+              <>
+                <Link
+                  to='/auth/register'
+                  className='btn btn-outline border border-primary hover:bg-primary hover:text-primary-content'>
+                  Register
+                </Link>
+                <Link to='/auth/login' className='btn btn-primary'>
+                  Login
+                </Link>
+              </>
+            )}
+            {user && (
+              <>
+                <img
+                  className='rounded-full w-10 h-10 cursor-pointer'
+                  src={user.photoURL}
+                  alt={user.displayName}
+                />
+                <button onClick={handleLogOut} className='btn  btn-primary'>
+                  LogOut
+                </button>
+              </>
+            )}
           </div>
         </nav>
       </Container>

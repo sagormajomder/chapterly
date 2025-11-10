@@ -92,7 +92,8 @@ export default function RegistrationPage() {
             <div className='card-body basis-1/2 self-center py-10'>
               <form onSubmit={handleUserRegister}>
                 <h2 className='heading-secondary text-center mb-6'>
-                  Open a New Chapter <br /> with Chapterly
+                  Open a New Chapter <br /> with Chapter
+                  <span className='font-bold text-primary'>ly.</span>
                 </h2>
                 <fieldset className='fieldset'>
                   {/* Name */}
@@ -166,7 +167,7 @@ export default function RegistrationPage() {
                     both lower (a-z) and upper case letters (A-Z)
                   </p>
 
-                  <button className='btn btn-neutral mt-4'>Register</button>
+                  <button className='btn btn-primary mt-4'>Register</button>
                 </fieldset>
               </form>
               <div className='divider'>OR</div>
@@ -174,7 +175,9 @@ export default function RegistrationPage() {
               <GoogleLogin />
               <p className='text-center text-xs'>
                 Already Have An Account?{' '}
-                <Link className='hover:underline' to='/auth/login'>
+                <Link
+                  className='hover:underline hover:text-accent'
+                  to='/auth/login'>
                   Login now
                 </Link>
               </p>

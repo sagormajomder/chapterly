@@ -3,14 +3,42 @@
   themes: light --default;
 }
 
+@plugin "daisyui/theme" {
+  name: 'light';
+  default: true;
+  --color-primary: #f75454;
+  --color-secondary: #161619;
+}
+
 :root {
   --font-inter: 'Inter', sans-serif;
 }
 
 @theme inline {
   --default-font-family: var(--font-inter), var(--font-sans);
+
+  --color-primary: #f75454;
+  --color-primary-dark: #c64343;
+
+  --color-secondary: #161619;
+}
+
+.menu li a:hover {
+  @apply text-primary bg-transparent;
+}
+
+.active {
+  @apply text-primary font-semibold;
 }
 
 @utility heading-secondary {
   @apply xl:text-3xl text-2xl font-semibold mb-2;
 }
+
+/*
+- Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+- Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/

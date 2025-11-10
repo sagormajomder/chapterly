@@ -116,9 +116,11 @@ export default function LoginPage() {
                     )}
                   </div>
                   <div>
-                    <a className='link link-hover'>Forgot password?</a>
+                    <a className='link link-hover hover:text-accent'>
+                      Forgot password?
+                    </a>
                   </div>
-                  <button className='btn btn-neutral mt-4'>Login</button>
+                  <button className='btn btn-primary mt-4'>Login</button>
                 </fieldset>
               </form>
               <div className='divider'>OR</div>
@@ -126,7 +128,9 @@ export default function LoginPage() {
               <GoogleLogin />
               <p className='text-center text-xs'>
                 Don't Have An Account?{' '}
-                <Link className='hover:underline' to='/auth/register'>
+                <Link
+                  className='hover:underline hover:text-accent'
+                  to='/auth/register'>
                   Register Now
                 </Link>
               </p>
