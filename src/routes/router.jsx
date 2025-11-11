@@ -32,6 +32,7 @@ const router = createBrowserRouter([
             <BookDetailsPage />
           </ProtectedRoute>
         ),
+        loader: async () => axios.get('http://localhost:3000/all-books'),
       },
 
       {

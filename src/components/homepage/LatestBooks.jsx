@@ -44,7 +44,7 @@ function Book({ book }) {
           <p className='text-xs bg-accent px-2 py-1 rounded-full max-w-fit mb-2'>
             {genre.toUpperCase()}
           </p>
-          <p className='text-xs bg-primary text-primary-content px-2 py-1 rounded-full max-w-fit mb-2 inline-flex gap-0.5'>
+          <p className='text-xs bg-primary text-white font-medium px-2 py-1 rounded-full max-w-fit mb-2 inline-flex gap-0.5'>
             <span className='text-yellow-300'>
               <FaStar />
             </span>{' '}
