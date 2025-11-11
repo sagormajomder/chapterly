@@ -35,7 +35,7 @@ export default function Navbar() {
     </>
   );
   return (
-    <header>
+    <header className='py-1'>
       <Container>
         <nav className='navbar'>
           {/* Navbar Start */}

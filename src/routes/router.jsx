@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router';
 import RootLayout from '../layouts/RootLayout';
+import BookDetailsPage from '../pages/BookDetailsPage';
 import ErrorPage from '../pages/ErrorPage';
 import AddBookPage from './../pages/AddBookPage';
 import AllBookPage from './../pages/AllBookPage';
@@ -21,6 +22,14 @@ const router = createBrowserRouter([
       {
         path: 'all-books',
         Component: AllBookPage,
+      },
+      {
+        path: 'book-details/:id',
+        element: (
+          <ProtectedRoute>
+            <BookDetailsPage />
+          </ProtectedRoute>
+        ),
       },
 
       {

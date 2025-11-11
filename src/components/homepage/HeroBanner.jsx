@@ -9,7 +9,7 @@ export default function HeroBanner() {
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
-        className='text-center space-y-8 px-4 md:px-0 lg:max-w-3xl sm:max-w-xl  mx-auto'>
+        className='text-center space-y-8 px-4 md:px-0 lg:max-w-3xl sm:max-w-xl  mx-auto overflow-hidden'>
         <h1 className='font-bold lg:text-5xl sm:text-4xl text-3xl lg:leading-14 sm:leading-11'>
           The Best <span className='text-primary'>Books</span> for Every Chapter
           of Your Life, Bringing New Meaning to Your
