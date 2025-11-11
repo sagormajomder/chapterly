@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createBrowserRouter } from 'react-router';
+import Loader from '../components/Loader';
 import RootLayout from '../layouts/RootLayout';
 import BookDetailsPage from '../pages/BookDetailsPage';
 import ErrorPage from '../pages/ErrorPage';
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     Component: RootLayout,
+    hydrateFallbackElement: <Loader />,
     children: [
       {
         index: true,

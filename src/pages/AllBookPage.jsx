@@ -27,7 +27,7 @@ export default function AllBookPage() {
             </thead>
             <tbody>
               {books.map((book, i) => (
-                <Row book={book} index={i + 1} />
+                <Row key={book._id} book={book} index={i + 1} />
               ))}
             </tbody>
           </table>

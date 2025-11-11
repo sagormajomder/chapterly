@@ -15,6 +15,8 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  console.log(location);
+
   function handleUserLogin(e) {
     e.preventDefault();
 

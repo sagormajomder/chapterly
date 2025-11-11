@@ -13,7 +13,7 @@ export default function BookDetailsPage() {
     <section className='py-14'>
       <Container>
         <div className='flex md:gap-8 gap-12  justify-center md:flex-row flex-col'>
-          <figure className='relative basis-[35%]'>
+          <figure className='relative xl:basis-[22%] basis-[35%] lg:basis-[30%]'>
             <img
               className='object-cover h-100 md:h-auto'
               src={coverImage}
