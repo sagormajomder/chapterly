@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { createBrowserRouter } from 'react-router';
 import RootLayout from '../layouts/RootLayout';
 import BookDetailsPage from '../pages/BookDetailsPage';
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       {
         path: 'all-books',
         Component: AllBookPage,
+        loader: async () => axios.get('http://localhost:3000/all-books'),
       },
       {
         path: 'book-details/:id',
