@@ -17,10 +17,15 @@ export default function LatestBooks() {
           title='Explore Latest Books'
           desc='Browse the newest stories shaping readers’ shelves and imaginations'
         />
-        <div className='grid lg:grid-cols-3 sm:grid-cols-2 md:gap-10 gap-5'>
+        <div className='grid lg:grid-cols-3 sm:grid-cols-2 md:gap-10 gap-5 mb-6'>
           {latestBooks.map(book => (
             <Book key={book._id} book={book} />
           ))}
+        </div>
+        <div className='w-full text-center'>
+          <Link to='/all-books' className='btn btn-primary'>
+            Explore More
+          </Link>
         </div>
       </Container>
     </section>
@@ -30,7 +35,7 @@ export default function LatestBooks() {
 function Book({ book }) {
   const { _id, title, author, genre, rating, coverImage } = book;
   return (
-    <div className='p-6 pb-0 bg-red-50 flex flex-col items-center justify-between gap-5 min-[75rem]:h-102.5 overflow-hidden group'>
+    <div className='p-6 pb-0 bg-red-50 flex flex-col items-center justify-between gap-5 min-[75rem]:h-102.5 overflow-hidden group rounded-md'>
       <figure>
         <img className='h-62.5' src={coverImage} alt={title} />
       </figure>

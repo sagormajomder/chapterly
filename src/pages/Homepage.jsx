@@ -1,3 +1,4 @@
+import BookOfTheWeek from '../components/homepage/BookOfTheWeek';
 import HeroBanner from '../components/homepage/HeroBanner';
 import LatestBooks from '../components/homepage/LatestBooks';
 export default function Homepage() {
@@ -5,6 +6,7 @@ export default function Homepage() {
     <div className='space-y-14'>
       <HeroBanner />
       <LatestBooks />
+      <BookOfTheWeek />
     </div>
   );
 }
