@@ -1,3 +1,4 @@
+import About from '../components/homepage/About';
 import BookOfTheWeek from '../components/homepage/BookOfTheWeek';
 import HeroBanner from '../components/homepage/HeroBanner';
 import LatestBooks from '../components/homepage/LatestBooks';
@@ -7,6 +8,7 @@ export default function Homepage() {
       <HeroBanner />
       <LatestBooks />
       <BookOfTheWeek />
+      <About />
     </div>
   );
 }
