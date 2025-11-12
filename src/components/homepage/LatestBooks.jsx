@@ -1,11 +1,11 @@
-import axios from 'axios';
 import { use } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { Link } from 'react-router';
+import { customAxios } from '../../helpers/helpers';
 import SectionTitle from '../SectionTitle';
 import Container from './../Container';
 
-const latestBooksPromise = axios.get('http://localhost:3000/latest-books');
+const latestBooksPromise = customAxios().get('/latest-books');
 
 export default function LatestBooks() {
   const latestBooks = use(latestBooksPromise).data;

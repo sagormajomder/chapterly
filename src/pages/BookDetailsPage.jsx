@@ -1,13 +1,12 @@
 import { FaStar } from 'react-icons/fa6';
-import { useLoaderData, useParams } from 'react-router';
+import { useLoaderData } from 'react-router';
 import Container from '../components/Container';
 
 export default function BookDetailsPage() {
-  const { id } = useParams();
-  const books = useLoaderData().data;
-
+  // const data = useLoaderData();
+  // console.log(data);
   const { title, author, genre, rating, summary, coverImage, userEmail } =
-    books.find(book => book._id === id);
+    useLoaderData().data;
 
   return (
     <section className='py-14'>

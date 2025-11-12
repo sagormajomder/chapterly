@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { createBrowserRouter } from 'react-router';
 import Loader from '../components/Loader';
+import { customAxios } from '../helpers/helpers';
 import RootLayout from '../layouts/RootLayout';
 import BookDetailsPage from '../pages/BookDetailsPage';
 import ErrorPage from '../pages/ErrorPage';
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       {
         path: 'all-books',
         Component: AllBookPage,
-        loader: async () => axios.get('http://localhost:3000/all-books'),
+        loader: async () => customAxios().get('/all-books'),
       },
       {
         path: 'book-details/:id',
@@ -34,7 +34,8 @@ const router = createBrowserRouter([
             <BookDetailsPage />
           </ProtectedRoute>
         ),
-        loader: async () => axios.get('http://localhost:3000/all-books'),
+        loader: async ({ params }) =>
+          customAxios().get(`/book-details/${params.id}`),
       },
 
       {
