@@ -79,11 +79,15 @@ export default function Navbar() {
                   )}
                   {user && (
                     <div className='flex gap-3 min-[26.875rem]:hidden ml-2'>
-                      <img
-                        className='rounded-full w-10 h-10 cursor-pointer object-cover'
-                        src={user.photoURL}
-                        alt={user.displayName}
-                      />
+                      <div
+                        className='tooltip tooltip-primary tooltip-bottom'
+                        data-tip={user.displayName}>
+                        <img
+                          className='rounded-full w-10 h-10 cursor-pointer object-cover'
+                          src={user.photoURL}
+                          alt={user.displayName}
+                        />
+                      </div>
                       <button
                         onClick={handleLogOut}
                         className='btn  btn-primary basis-4/6'>
@@ -118,12 +122,15 @@ export default function Navbar() {
             )}
             {user && (
               <>
-                <img
-                  className='rounded-full w-10 h-10 cursor-pointer object-cover'
-                  src={user.photoURL}
-                  alt={user.displayName}
-                  title={user.displayName}
-                />
+                <div
+                  className='tooltip tooltip-primary tooltip-bottom'
+                  data-tip={user.displayName}>
+                  <img
+                    className='rounded-full w-10 h-10 cursor-pointer object-cover'
+                    src={user.photoURL}
+                    alt={user.displayName}
+                  />
+                </div>
                 <button onClick={handleLogOut} className='btn  btn-primary'>
                   LogOut
                 </button>
