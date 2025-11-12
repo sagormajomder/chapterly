@@ -1,9 +1,9 @@
-import axios from 'axios';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import Container from '../components/Container';
 import SectionTitle from '../components/SectionTitle';
 import { useAuth } from '../contexts/AuthContext';
+import { useSecureAxios } from '../hooks/useSecureAxios';
 
 export default function AddBookPage() {
   const [title, setTitle] = useState('');
@@ -13,6 +13,7 @@ export default function AddBookPage() {
   const [image, setImage] = useState('');
   const [summary, setSummary] = useState('');
   const { user } = useAuth();
+  const axiosSecure = useSecureAxios();
 
   function handleAddBook(e) {
     e.preventDefault();
@@ -29,8 +30,8 @@ export default function AddBookPage() {
 
     // console.log(newBook);
 
-    axios.post('http://localhost:3000/add-book', newBook).then(result => {
-      console.log(result.data);
+    axiosSecure.post('/add-book', newBook).then(result => {
+      // console.log(result.data);
 
       if (result.data.insertedId) {
         toast.success('The Book is successfully added!');
