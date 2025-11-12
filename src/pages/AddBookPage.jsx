@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 import Container from '../components/Container';
 import SectionTitle from '../components/SectionTitle';
 import { useAuth } from '../contexts/AuthContext';
@@ -15,6 +16,8 @@ export default function AddBookPage() {
   const { user } = useAuth();
   const axiosSecure = useSecureAxios();
 
+  const navigate = useNavigate();
+
   function handleAddBook(e) {
     e.preventDefault();
 
@@ -26,6 +29,8 @@ export default function AddBookPage() {
       coverImage: image,
       summary,
       userEmail: user?.email,
+      userName: user?.displayName,
+      userPhoto: user?.photoURL,
     };
 
     // console.log(newBook);
@@ -43,6 +48,10 @@ export default function AddBookPage() {
         setRating(0);
         setImage('');
         setSummary('');
+
+        navigate('/my-books');
+      } else {
+        toast.error('Something error occured!');
       }
     });
   }
@@ -59,19 +68,6 @@ export default function AddBookPage() {
             className='card-body shadow-md max-w-lg'
             onSubmit={handleAddBook}>
             <fieldset className='fieldset'>
-              {/* Book Title */}
-              <label htmlFor='userEmail' className='label'>
-                User Email
-              </label>
-              <input
-                id='userEmail'
-                type='text'
-                className='input w-full'
-                placeholder='User Email'
-                defaultValue={user.email}
-                required
-                readOnly
-              />
               {/* Book Title */}
               <label htmlFor='title' className='label'>
                 Title
@@ -113,6 +109,10 @@ export default function AddBookPage() {
                 onChange={e => setGenre(e.target.value)}
                 required
               />
+              <p className='mt-1 text-gray-500 text-xs'>
+                Add multiple genres using "/" separator. Example: "Fantasy /
+                Adventure / Mystery"
+              </p>
 
               {/* Rating */}
               <label htmlFor='rating' className='label'>
@@ -125,6 +125,7 @@ export default function AddBookPage() {
                 placeholder='Rating'
                 value={rating}
                 step={0.1}
+                min={0}
                 onChange={e => setRating(e.target.value)}
                 required
               />
