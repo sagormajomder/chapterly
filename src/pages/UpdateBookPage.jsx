@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router';
 import forbiddenSVG from '../assets/forbidden.svg';
 import Container from '../components/Container';
+import Loader from '../components/Loader';
 import SectionTitle from '../components/SectionTitle';
 import { useAuth } from '../contexts/AuthContext';
 import { useSecureAxios } from '../hooks/useSecureAxios';
@@ -18,6 +19,8 @@ export default function UpdateBookPage() {
   const [updateRating, setUpdateRating] = useState('');
   const [updateCoverImage, setUpdateCoverImage] = useState('');
   const [updateSummary, setUpdateSummary] = useState('');
+
+  const [loader, setLoader] = useState(true);
 
   const axiosSecure = useSecureAxios();
 
@@ -62,6 +65,7 @@ export default function UpdateBookPage() {
     function () {
       axiosSecure.get(`/book-details/${id}`).then(result => {
         setBook(result.data);
+        setLoader(false);
       });
     },
     [axiosSecure, id]
@@ -79,6 +83,8 @@ export default function UpdateBookPage() {
     },
     [book]
   );
+
+  if (loader) return <Loader />;
 
   return (
     <section className='py-14'>

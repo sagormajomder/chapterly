@@ -7,20 +7,25 @@ import Container from '../components/Container';
 import SectionTitle from '../components/SectionTitle';
 import { useAuth } from '../contexts/AuthContext';
 import { useSecureAxios } from '../hooks/useSecureAxios';
+import Loader from './../components/Loader';
 
 export default function MyBookPage() {
   const { user } = useAuth();
   const axiosSecure = useSecureAxios();
   const [mybooks, setMyBooks] = useState([]);
+  const [loader, setLoader] = useState(true);
 
   useEffect(
     function () {
       axiosSecure.get(`/my-books?email=${user?.email}`).then(result => {
         setMyBooks(result.data);
+        setLoader(false);
       });
     },
     [axiosSecure, user]
   );
+
+  if (loader) return <Loader />;
 
   return (
     <section className='py-14'>

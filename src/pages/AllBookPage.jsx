@@ -1,9 +1,33 @@
+import { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { Link, useLoaderData } from 'react-router';
 import SectionTitle from '../components/SectionTitle';
 import Container from './../components/Container';
+import Loader from './../components/Loader';
+import { customAxios } from './../helpers/helpers';
+
 export default function AllBookPage() {
   const books = useLoaderData().data;
+  const [sortBy, setSortBy] = useState('');
+  const [sortedBooks, setSortedBooks] = useState(books);
+
+  function handleSortBy(e) {
+    setSortBy(e.target.value);
+  }
+
+  useEffect(
+    function () {
+      if (sortBy) {
+        customAxios()
+          .get(`/sort?sortby=${sortBy}`)
+          .then(result => {
+            setSortedBooks(result.data);
+          });
+      }
+    },
+    [sortBy]
+  );
+
   return (
     <section className='py-14'>
       <Container>
@@ -11,6 +35,15 @@ export default function AllBookPage() {
           title='Explore Books'
           desc='Browse every book , classic, and trending titles.'
         />
+        <div className='text-right mb-2'>
+          <select className='select' value={sortBy} onChange={handleSortBy}>
+            <option value='' disabled={true}>
+              Sort by rating
+            </option>
+            <option value='low'>Low-High</option>
+            <option value='high'>High-Low</option>
+          </select>
+        </div>
         {/* Table */}
         <div className='overflow-x-auto rounded-box border border-base-content/5 bg-base-100'>
           <table className='table'>
@@ -26,7 +59,7 @@ export default function AllBookPage() {
               </tr>
             </thead>
             <tbody>
-              {books.map((book, i) => (
+              {sortedBooks.map((book, i) => (
                 <Row key={book._id} book={book} index={i + 1} />
               ))}
             </tbody>
