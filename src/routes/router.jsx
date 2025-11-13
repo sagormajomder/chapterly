@@ -22,6 +22,7 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Homepage,
+        loader: async () => customAxios().get('/latest-books'),
       },
       {
         path: 'all-books',

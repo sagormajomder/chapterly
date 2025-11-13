@@ -31,6 +31,7 @@ export default function AddBookPage() {
       userEmail: user?.email,
       userName: user?.displayName,
       userPhoto: user?.photoURL,
+      created_at: new Date(),
     };
 
     // console.log(newBook);

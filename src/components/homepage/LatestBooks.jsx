@@ -1,14 +1,18 @@
-import { use } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { Link } from 'react-router';
-import { customAxios } from '../../helpers/helpers';
 import SectionTitle from '../SectionTitle';
 import Container from './../Container';
 
-const latestBooksPromise = customAxios().get('/latest-books');
+export default function LatestBooks({ latestBooks }) {
+  // const [latestBooks, setLatestBooks] = useState([]);
 
-export default function LatestBooks() {
-  const latestBooks = use(latestBooksPromise).data;
+  // useEffect(function () {
+  //   customAxios()
+  //     .get('/latest-books')
+  //     .then(result => {
+  //       setLatestBooks(result.data);
+  //     });
+  // }, []);
 
   return (
     <section className='py-14'>

@@ -25,6 +25,17 @@ export default function MyBookPage() {
     [axiosSecure, user]
   );
 
+  function handleDeleteBookById(id) {
+    axiosSecure.delete(`/delete-book/${id}`).then(result => {
+      if (result.data.acknowledged) {
+        toast.success('Book is successfully deleted!');
+        setMyBooks(prev => prev.filter(book => book._id !== id));
+      } else {
+        toast.error('Some error occured!');
+      }
+    });
+  }
+
   if (loader) return <Loader />;
 
   return (
@@ -50,30 +61,96 @@ export default function MyBookPage() {
             </p>
           </div>
         ) : (
-          <div className='overflow-x-auto rounded-box border border-base-content/5 bg-base-100'>
-            <table className='table'>
-              {/* head */}
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Book</th>
-                  <th>Author</th>
-                  <th>Rating</th>
-                  <th>Genre</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {mybooks.map((book, i) => (
-                  <Row
-                    key={book._id}
-                    book={book}
-                    index={i + 1}
-                    onAddMyBooks={setMyBooks}
-                  />
-                ))}
-              </tbody>
-            </table>
+          // <div className='overflow-x-auto rounded-box border border-base-content/5 bg-base-100'>
+          //   <table className='table'>
+          //     {/* head */}
+          //     <thead>
+          //       <tr>
+          //         <th></th>
+          //         <th>Book</th>
+          //         <th>Author</th>
+          //         <th>Rating</th>
+          //         <th>Genre</th>
+          //         <th></th>
+          //       </tr>
+          //     </thead>
+          //     <tbody>
+          //       {mybooks.map((book, i) => (
+          //         <Row
+          //           key={book._id}
+          //           book={book}
+          //           index={i + 1}
+          //           onAddMyBooks={setMyBooks}
+          //         />
+          //       ))}
+          //     </tbody>
+          //   </table>
+          // </div>
+
+          <div className='rounded-box border  border-gray-300 dark:border-gray-700 md:border-base-content/5 dark:md:border-base-content/5 bg-base-100'>
+            {/* Desktop */}
+            <div className='hidden md:block overflow-x-auto'>
+              <table className='table'>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Book</th>
+                    <th>Author</th>
+                    <th>Rating</th>
+                    <th>Genre</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {mybooks.map((book, i) => (
+                    <Row
+                      key={book._id}
+                      book={book}
+                      index={i + 1}
+                      onAddMyBooks={setMyBooks}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile: */}
+            <div className='md:hidden p-4 space-y-3'>
+              {mybooks.map((book, i) => (
+                <div
+                  key={book._id}
+                  className='border dark:border-gray-700 border-gray-300 rounded-md p-4 flex flex-col sm:flex-row justify-between items-start gap-3'>
+                  <div>
+                    <h4 className='font-semibold'>
+                      {i + 1}. {book.title}
+                    </h4>
+                    <p className='text-sm text-muted'>{book.author}</p>
+                    <div className='flex items-center gap-2 mt-2'>
+                      <span className='text-yellow-300'>
+                        <FaStar />
+                      </span>
+                      <span className='text-xs bg-primary text-white px-2 py-1 rounded-full'>
+                        {book.rating}
+                      </span>
+                    </div>
+                    <p className='mt-2 text-sm text-gray-600'>{book.genre}</p>
+                  </div>
+
+                  <div className='flex gap-2 mt-3 sm:mt-0'>
+                    <Link
+                      to={`/update-book/${book._id}`}
+                      className='btn btn-primary btn-sm'>
+                      Update
+                    </Link>
+                    <button
+                      onClick={() => handleDeleteBookById(book._id)}
+                      className='btn btn-primary btn-sm'>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </Container>
