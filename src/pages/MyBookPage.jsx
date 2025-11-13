@@ -107,7 +107,8 @@ export default function MyBookPage() {
                       key={book._id}
                       book={book}
                       index={i + 1}
-                      onAddMyBooks={setMyBooks}
+                      // onAddMyBooks={setMyBooks}
+                      onDeleteBookById={handleDeleteBookById}
                     />
                   ))}
                 </tbody>
@@ -158,20 +159,20 @@ export default function MyBookPage() {
   );
 }
 
-function Row({ book, index, onAddMyBooks }) {
+function Row({ book, index, onDeleteBookById }) {
   const { _id, title, author, genre, rating } = book;
 
-  const axiosSecure = useSecureAxios();
-  function handleDeleteBook() {
-    axiosSecure.delete(`/delete-book/${_id}`).then(result => {
-      if (result.data.acknowledged) {
-        toast.success('Book is successfully deleted!');
-        onAddMyBooks(prevB => prevB.filter(book => book._id !== _id));
-      } else {
-        toast.error('Some error occured!');
-      }
-    });
-  }
+  // const axiosSecure = useSecureAxios();
+  // function handleDeleteBook() {
+  //   axiosSecure.delete(`/delete-book/${_id}`).then(result => {
+  //     if (result.data.acknowledged) {
+  //       toast.success('Book is successfully deleted!');
+  //       onAddMyBooks(prevB => prevB.filter(book => book._id !== _id));
+  //     } else {
+  //       toast.error('Some error occured!');
+  //     }
+  //   });
+  // }
 
   return (
     <tr>
@@ -191,7 +192,9 @@ function Row({ book, index, onAddMyBooks }) {
         <Link to={`/update-book/${_id}`} className='btn btn-primary'>
           Update
         </Link>
-        <button onClick={handleDeleteBook} className='btn btn-primary'>
+        <button
+          onClick={() => onDeleteBookById(_id)}
+          className='btn btn-primary'>
           Delete
         </button>
       </td>
