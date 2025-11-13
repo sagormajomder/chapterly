@@ -73,6 +73,7 @@ export default function BookDetailsPage() {
     <section className='py-14'>
       <Container>
         <div className='flex md:gap-8 gap-12  justify-center md:flex-row flex-col'>
+          {/* Image Part */}
           <figure className='relative xl:basis-[22%] basis-[35%] lg:basis-[30%]'>
             <img
               className='object-cover h-100 '
@@ -86,14 +87,36 @@ export default function BookDetailsPage() {
               {book?.rating}
             </p>
           </figure>
+          {/* Content Part */}
           <div className='basis-1/2'>
             <h2 className='heading-secondary'>{book?.title}</h2>
-            <p className=''>
+            <p className='mb-4'>
               <strong>By (Author)</strong>: {book?.author}
             </p>
-            <p className='mb-4'>
-              <strong>Added by:</strong> {book?.userEmail}
+            <p className='mb-2'>
+              <strong>Added by</strong>
             </p>
+
+            <div className='p-3 flex flex-col sm:flex-row gap-4 border border-gray-300 dark:border-gray-700 rounded-md items-center mb-4'>
+              <img
+                className='h-12 w-12 rounded-full object-cover basis-fit self-start'
+                src={book?.userPhoto}
+                alt={book?.userName}
+              />
+              <div className='basis-fit'>
+                <p className='text-xl font-semibold'>{book?.userName}</p>
+                <p className='text-xs self-end ml-auto basis-[12%]'>
+                  Added Date:{' '}
+                  {book?.created_at
+                    ? `${format(
+                        new Date(book.created_at),
+                        'EEEE, MMMM dd, yyyy'
+                      )}`
+                    : null}
+                </p>
+              </div>
+            </div>
+
             <p className='text-lg mb-3'>
               <strong>Summary: </strong>
               {book?.summary}
@@ -110,9 +133,11 @@ export default function BookDetailsPage() {
             </div>
           </div>
         </div>
-        <div className='divider'></div>
-        {/* Add Comments */}
-        <div>
+
+        <div className='max-w-4xl mx-auto'>
+          <div className='divider'></div>
+          {/* Add Comments */}
+
           <form className='flex flex-col gap-2' onSubmit={handleAddComment}>
             <textarea
               className='textarea w-full'
@@ -121,14 +146,15 @@ export default function BookDetailsPage() {
               placeholder='Add your comments'></textarea>
             <button className='btn btn-primary self-end'>Post</button>
           </form>
-        </div>
-        {/* Comments List */}
-        <div>
-          <h3 className='heading-tertiary'>Comments</h3>
-          <div className='space-y-2'>
-            {commentList.map(com => (
-              <Comment key={com._id} com={com} />
-            ))}
+
+          {/* Comments List */}
+          <div>
+            <h3 className='heading-tertiary'>Comments</h3>
+            <div className='space-y-2'>
+              {commentList.map(com => (
+                <Comment key={com._id} com={com} />
+              ))}
+            </div>
           </div>
         </div>
       </Container>
@@ -152,8 +178,8 @@ function Comment({ com }) {
           <p>{comment}</p>
         </div>
       </div>
-      <p className='text-xs self-end ml-auto basis-[12%]'>
-        - {format(created_at, 'Pp')}
+      <p className='text-xs self-end ml-auto basis-[15%]'>
+        - {format(created_at, 'dd/MM/yy h:mm a')}
       </p>
     </div>
   );
