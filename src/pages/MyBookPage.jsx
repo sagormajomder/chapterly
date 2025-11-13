@@ -59,6 +59,9 @@ export default function MyBookPage() {
               You haven’t added any books yet. Start building your collection
               now.
             </p>
+            <Link to='/add-book' className='btn btn-primary -mt-8'>
+              Add Book
+            </Link>
           </div>
         ) : (
           // <div className='overflow-x-auto rounded-box border border-base-content/5 bg-base-100'>

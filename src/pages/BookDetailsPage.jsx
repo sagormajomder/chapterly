@@ -74,9 +74,9 @@ export default function BookDetailsPage() {
       <Container>
         <div className='flex md:gap-8 gap-12  justify-center md:flex-row flex-col'>
           {/* Image Part */}
-          <figure className='relative xl:basis-[22%] basis-[35%] lg:basis-[30%]'>
+          <figure className='relative '>
             <img
-              className='object-cover h-100 '
+              className='object-cover h-100 max-w-67.5'
               src={book?.coverImage}
               alt={book?.title}
             />

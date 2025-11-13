@@ -41,7 +41,11 @@ function Book({ book }) {
   return (
     <div className='p-6 pb-0 bg-red-50 dark:bg-base-100 dark:border dark:border-gray-700 flex flex-col items-center justify-between gap-5 min-[75rem]:h-102.5 overflow-hidden group rounded-lg'>
       <figure>
-        <img className='h-62.5' src={coverImage} alt={title} />
+        <img
+          className='h-62.5 w-40 object-cover'
+          src={coverImage}
+          alt={title}
+        />
       </figure>
       <div className='self-start w-full  bg-red-50 dark:bg-base-100  py-5 min-[75rem]:group-hover:-translate-y-18 transition duration-300'>
         <div className='flex justify-between'>
