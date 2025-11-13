@@ -65,7 +65,7 @@ export default function AddBookPage() {
         />
         <div className='flex items-center justify-center w-full h-full'>
           <form
-            className='card-body shadow-md max-w-lg'
+            className='card-body shadow-xl dark:shadow-none dark:border dark:border-gray-700 rounded-xl  max-w-lg'
             onSubmit={handleAddBook}>
             <fieldset className='fieldset'>
               {/* Book Title */}

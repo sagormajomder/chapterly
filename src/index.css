@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @plugin "daisyui" {
-  themes: light --default;
+  themes: light --default, dark --prefersdark;
 }
 
 @plugin "daisyui/theme" {
@@ -9,6 +9,14 @@
   --color-primary: #f75454;
   --color-secondary: #161619;
 }
+
+@plugin "daisyui/theme" {
+  name: 'dark';
+  --color-primary: #f75454;
+  --color-secondary: #fff;
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root {
   --font-inter: 'Inter', sans-serif;
@@ -20,7 +28,7 @@
   --color-primary: #f75454;
   --color-primary-dark: #c64343;
 
-  --color-secondary: #161619;
+  --color-dark: #161619;
 }
 
 .menu li a:hover {

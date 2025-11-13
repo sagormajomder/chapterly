@@ -29,7 +29,9 @@ export default function BookOfTheWeek() {
             className='basis-1/2'>
             <h3 className='heading-tertiary'>
               Gone Girl{' '}
-              <span className='text-base text-gray-600'>by Gillian Flynn</span>
+              <span className='text-base text-gray-600 dark:text-gray-400'>
+                by Gillian Flynn
+              </span>
             </h3>
             <p className='text-xs bg-accent px-2 py-1 rounded-full max-w-fit mb-2'>
               {'Thriller / Mystery'.toUpperCase()}

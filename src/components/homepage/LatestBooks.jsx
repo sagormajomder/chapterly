@@ -17,7 +17,7 @@ export default function LatestBooks() {
           title='Explore Latest Books'
           desc='Browse the newest stories shaping readers’ shelves and imaginations'
         />
-        <div className='grid lg:grid-cols-3 sm:grid-cols-2 md:gap-10 gap-5 mb-6'>
+        <div className='grid lg:grid-cols-3 sm:grid-cols-2 md:gap-10 gap-5 mb-6 '>
           {latestBooks.map(book => (
             <Book key={book._id} book={book} />
           ))}
@@ -35,11 +35,11 @@ export default function LatestBooks() {
 function Book({ book }) {
   const { _id, title, author, genre, rating, coverImage } = book;
   return (
-    <div className='p-6 pb-0 bg-red-50 flex flex-col items-center justify-between gap-5 min-[75rem]:h-102.5 overflow-hidden group rounded-md'>
+    <div className='p-6 pb-0 bg-red-50 dark:bg-base-100 dark:border dark:border-gray-700 flex flex-col items-center justify-between gap-5 min-[75rem]:h-102.5 overflow-hidden group rounded-lg'>
       <figure>
         <img className='h-62.5' src={coverImage} alt={title} />
       </figure>
-      <div className='self-start w-full  bg-red-50 py-5 min-[75rem]:group-hover:-translate-y-18 transition duration-300'>
+      <div className='self-start w-full  bg-red-50 dark:bg-base-100  py-5 min-[75rem]:group-hover:-translate-y-18 transition duration-300'>
         <div className='flex justify-between'>
           <p className='text-xs bg-accent px-2 py-1 rounded-full max-w-fit mb-2'>
             {genre.toUpperCase()}
