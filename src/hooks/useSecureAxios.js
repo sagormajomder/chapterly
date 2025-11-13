@@ -9,7 +9,7 @@ export function useSecureAxios() {
   const { user } = useAuth();
   axiosInstance.interceptors.request.use(config => {
     // console.log(config);
-    config.headers.authorization = `Bearer ${user.accessToken}`;
+    config.headers.authorization = `Bearer ${user?.accessToken}`;
     return config;
   });
 

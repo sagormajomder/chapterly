@@ -1,15 +1,60 @@
+import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaStar } from 'react-icons/fa6';
 import { useLoaderData, useParams } from 'react-router';
 import Container from '../components/Container';
+import { useAuth } from '../contexts/AuthContext';
 import { useSecureAxios } from '../hooks/useSecureAxios';
 import ErrorPage from './ErrorPage';
 
 export default function BookDetailsPage() {
   const { id } = useParams();
   const [book, setBook] = useState(null);
+  const [comment, setComment] = useState('');
+  const [commentList, setCommentList] = useState([]);
   const books = useLoaderData().data;
   const axiosSecure = useSecureAxios();
+  const { user } = useAuth();
+
+  function handleAddComment(e) {
+    e.preventDefault();
+
+    const newComment = {
+      userName: user?.displayName,
+      userPhoto: user?.photoURL,
+      comment,
+      bookID: book?._id,
+      created_at: new Date(),
+    };
+
+    axiosSecure.post('/add-comment', newComment).then(result => {
+      console.log(result.data);
+
+      if (result.data.insertedId) {
+        toast.success('You post a comment');
+
+        // Clear Info
+        setComment('');
+
+        // Get data immediately
+        axiosSecure.get(`/comments/${book?._id}`).then(result => {
+          setCommentList(result.data);
+        });
+      } else {
+        toast.error('Some error occured!');
+      }
+    });
+  }
+
+  useEffect(
+    function () {
+      axiosSecure.get(`/comments/${book?._id}`).then(result => {
+        setCommentList(result.data);
+      });
+    },
+    [axiosSecure, book]
+  );
 
   useEffect(
     function () {
@@ -65,7 +110,51 @@ export default function BookDetailsPage() {
             </div>
           </div>
         </div>
+        <div className='divider'></div>
+        {/* Add Comments */}
+        <div>
+          <form className='flex flex-col gap-2' onSubmit={handleAddComment}>
+            <textarea
+              className='textarea w-full'
+              value={comment}
+              onChange={e => setComment(e.target.value)}
+              placeholder='Add your comments'></textarea>
+            <button className='btn btn-primary self-end'>Post</button>
+          </form>
+        </div>
+        {/* Comments List */}
+        <div>
+          <h3 className='heading-tertiary'>Comments</h3>
+          <div className='space-y-2'>
+            {commentList.map(com => (
+              <Comment key={com._id} com={com} />
+            ))}
+          </div>
+        </div>
       </Container>
     </section>
+  );
+}
+
+function Comment({ com }) {
+  const { userName, userPhoto, comment, created_at } = com;
+
+  return (
+    <div className='p-5 flex flex-col sm:flex-row gap-4 border border-gray-300 dark:border-gray-700 rounded-md items-center'>
+      <div className='flex basis-[90%] gap-4 self-start'>
+        <img
+          className='h-16 w-16 rounded-full object-cover basis-fit self-start'
+          src={userPhoto}
+          alt={userName}
+        />
+        <div className='basis-fit'>
+          <p className='text-xl text-red-300'>{userName}</p>
+          <p>{comment}</p>
+        </div>
+      </div>
+      <p className='text-xs self-end ml-auto basis-[12%]'>
+        - {format(created_at, 'Pp')}
+      </p>
+    </div>
   );
 }
