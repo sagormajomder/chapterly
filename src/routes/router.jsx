@@ -4,6 +4,7 @@ import { customAxios } from '../helpers/helpers';
 import RootLayout from '../layouts/RootLayout';
 import BookDetailsPage from '../pages/BookDetailsPage';
 import ErrorPage from '../pages/ErrorPage';
+import UpdateBookPage from '../pages/UpdateBookPage';
 import AddBookPage from './../pages/AddBookPage';
 import AllBookPage from './../pages/AllBookPage';
 import Homepage from './../pages/Homepage';
@@ -51,6 +52,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <MyBookPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'update-book/:id',
+        element: (
+          <ProtectedRoute>
+            <UpdateBookPage />
           </ProtectedRoute>
         ),
       },

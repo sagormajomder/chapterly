@@ -3,6 +3,7 @@ import { FaStar } from 'react-icons/fa6';
 import { Link } from 'react-router';
 import emptySVG from '../assets/empty.svg';
 import Container from '../components/Container';
+import Loader from '../components/Loader';
 import SectionTitle from '../components/SectionTitle';
 import { useAuth } from '../contexts/AuthContext';
 import { useSecureAxios } from '../hooks/useSecureAxios';
@@ -11,9 +12,10 @@ export default function MyBookPage() {
   const { user } = useAuth();
   const axiosSecure = useSecureAxios();
   const [mybooks, setMyBooks] = useState([]);
+
   useEffect(
     function () {
-      axiosSecure.get(`/all-books?email=${user?.email}`).then(result => {
+      axiosSecure.get(`/my-books?email=${user?.email}`).then(result => {
         setMyBooks(result.data);
       });
     },

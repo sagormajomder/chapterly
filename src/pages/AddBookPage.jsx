@@ -51,7 +51,7 @@ export default function AddBookPage() {
 
         navigate('/my-books');
       } else {
-        toast.error('Something error occured!');
+        toast.error('Some error occured!');
       }
     });
   }
