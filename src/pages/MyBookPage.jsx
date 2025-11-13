@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaStar } from 'react-icons/fa6';
 import { Link } from 'react-router';
 import emptySVG from '../assets/empty.svg';
 import Container from '../components/Container';
-import Loader from '../components/Loader';
 import SectionTitle from '../components/SectionTitle';
 import { useAuth } from '../contexts/AuthContext';
 import { useSecureAxios } from '../hooks/useSecureAxios';
@@ -60,7 +60,12 @@ export default function MyBookPage() {
               </thead>
               <tbody>
                 {mybooks.map((book, i) => (
-                  <Row key={book._id} book={book} index={i + 1} />
+                  <Row
+                    key={book._id}
+                    book={book}
+                    index={i + 1}
+                    onAddMyBooks={setMyBooks}
+                  />
                 ))}
               </tbody>
             </table>
@@ -71,8 +76,21 @@ export default function MyBookPage() {
   );
 }
 
-function Row({ book, index }) {
+function Row({ book, index, onAddMyBooks }) {
   const { _id, title, author, genre, rating } = book;
+
+  const axiosSecure = useSecureAxios();
+  function handleDeleteBook() {
+    axiosSecure.delete(`/delete-book/${_id}`).then(result => {
+      if (result.data.acknowledged) {
+        toast.success('Book is successfully deleted!');
+        onAddMyBooks(prevB => prevB.filter(book => book._id !== _id));
+      } else {
+        toast.error('Some error occured!');
+      }
+    });
+  }
+
   return (
     <tr>
       <th>{index}</th>
@@ -91,7 +109,9 @@ function Row({ book, index }) {
         <Link to={`/update-book/${_id}`} className='btn btn-primary'>
           Update
         </Link>
-        <button className='btn btn-primary'>Delete</button>
+        <button onClick={handleDeleteBook} className='btn btn-primary'>
+          Delete
+        </button>
       </td>
     </tr>
   );

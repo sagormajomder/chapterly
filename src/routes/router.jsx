@@ -35,8 +35,7 @@ const router = createBrowserRouter([
             <BookDetailsPage />
           </ProtectedRoute>
         ),
-        loader: async ({ params }) =>
-          customAxios().get(`/book-details/${params.id}`),
+        loader: async () => customAxios().get('/all-books'),
       },
 
       {

@@ -35,10 +35,10 @@ export default function UpdateBookPage() {
       summary: updateSummary,
     };
 
-    console.log(updatedBook);
+    // console.log(updatedBook);
 
     axiosSecure.patch(`/update-book/${book?._id}`, updatedBook).then(result => {
-      console.log(result);
+      // console.log(result);
 
       if (result.data.acknowledged) {
         toast.success('The Book is successfully updated!');
@@ -69,12 +69,13 @@ export default function UpdateBookPage() {
 
   useEffect(
     function () {
-      setUpdateTitle(book?.title);
-      setUpdateAuthor(book?.author);
-      setUpdateGenre(book?.genre);
-      setUpdateRating(book?.rating);
-      setUpdateCoverImage(book?.coverImage);
-      setUpdateSummary(book?.summary);
+      if (!book) return;
+      setUpdateTitle(book.title ?? '');
+      setUpdateAuthor(book.author ?? '');
+      setUpdateGenre(book.genre ?? '');
+      setUpdateRating(book.rating ?? '');
+      setUpdateCoverImage(book.coverImage ?? '');
+      setUpdateSummary(book.summary ?? '');
     },
     [book]
   );
@@ -96,7 +97,7 @@ export default function UpdateBookPage() {
               alt='Forbidden Access'
             />
             <p className='text-xl text-center font-semibold max-w-3xl'>
-              You don't have permission to update this book
+              You don't have permission to update the book
             </p>
           </div>
         ) : (
