@@ -26,7 +26,7 @@ export default function BookOfTheWeek() {
             initial={{ x: 200, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className='basis-1/2'>
+            className='basis-1/2 dark:text-dark'>
             <h3 className='heading-tertiary'>
               Gone Girl{' '}
               <span className='text-base text-gray-600 dark:text-gray-400'>
