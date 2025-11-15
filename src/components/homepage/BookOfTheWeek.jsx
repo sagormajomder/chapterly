@@ -10,7 +10,7 @@ export default function BookOfTheWeek() {
           title='Book of the Week'
           desc='One book, one spotlight — explore this week’s featured read.'
         />
-        <div className='flex md:flex-row flex-col gap-10  items-start max-w-4xl mx-auto bg-red-50 md:bg-transparent p-4 md:p-0 min-[30rem]:p-10  rounded-md overflow-hidden'>
+        <div className='flex md:flex-row flex-col gap-10  items-start max-w-4xl mx-auto bg-red-50 md:bg-transparent p-4 md:p-0 min-[30rem]:p-10  rounded-md overflow-hidden dark:text-gray-400'>
           <motion.figure
             initial={{ y: 200, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -26,12 +26,10 @@ export default function BookOfTheWeek() {
             initial={{ x: 200, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className='basis-1/2 dark:text-dark'>
+            className='basis-1/2 dark:text-dark dark:md:text-secondary'>
             <h3 className='heading-tertiary'>
               Gone Girl{' '}
-              <span className='text-base text-gray-600 dark:text-gray-400'>
-                by Gillian Flynn
-              </span>
+              <span className='text-base text-gray-600 '>by Gillian Flynn</span>
             </h3>
             <p className='text-xs bg-accent px-2 py-1 rounded-full max-w-fit mb-2'>
               {'Thriller / Mystery'.toUpperCase()}
