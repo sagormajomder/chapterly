@@ -5,7 +5,7 @@ Chapterly is a digital library platform that lets users explore, add, and manage
 ## Table of Contents
 
 - [Key Features](#key-features)
-- [Tools & Technology](#tools--technology-used)
+- [Technology Used](#technology-used)
 - [Run it Locally](#run-it-locally)
 - [Live URL](#live-url)
 - [Project Dependencies](#project-dependencies)
@@ -25,7 +25,7 @@ Chapterly is a digital library platform that lets users explore, add, and manage
 
 ## Technology Used
 
-- **Frontend**: React.js, Daisyui
+- **Frontend**: JavaScript, React.js, Daisyui
 - **Backend**: Node.js, Express.js
 - **Authentication**: Firebase Authentication
 - **Database**: Mongodb
