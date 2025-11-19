@@ -8,6 +8,7 @@ Chapterly is a digital library platform that lets users explore, add, and manage
 - [Tools & Technology](#tools--technology-used)
 - [Run it Locally](#run-it-locally)
 - [Live URL](#live-url)
+- [Project Dependencies](#project-dependencies)
 - [Connect With Me](#connect-with-me)
 
 ## Key Features
