@@ -25,12 +25,12 @@ Chapterly is a digital library platform that lets users explore, add, and manage
 
 ## Technology Used
 
-Frontend: React.js, Daisyui
-Backend: Node.js, Express.js
-Authentication: Firebase Authentication
-Database: Mongodb
-Styling: Tailwind CSS
-Deployment: Vercel (Backend), Firebase (Frontend)
+- **Frontend**: React.js, Daisyui
+- **Backend**: Node.js, Express.js
+- **Authentication**: Firebase Authentication
+- **Database**: Mongodb
+- **Styling**: Tailwind CSS
+- **Deployment**: Vercel (Backend), Firebase (Frontend)
 
 ## Run it Locally
 
