@@ -1,5 +1,7 @@
 # Chapterly - Every Book, Every Chapter, Your Way
 
+![](./src/assets/project-screenshot.png)
+
 Chapterly is a digital library platform that lets users explore, add, and manage books with ease. Authenticated users can build personalized collections, update book details, and discover new titles—all in one intuitive, user-friendly space designed for passionate readers and organized book lovers.
 
 ## Table of Contents
