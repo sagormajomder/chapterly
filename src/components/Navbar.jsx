@@ -7,6 +7,7 @@ import Container from './Container';
 export default function Navbar() {
   const { signOutUser, user, setUser } = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [isScrolled, setIsScrolled] = useState(false);
 
   function handleLogOut() {
     signOutUser()
@@ -30,6 +31,12 @@ export default function Navbar() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 0);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const links = (
     <>
       <li>
@@ -47,7 +54,10 @@ export default function Navbar() {
     </>
   );
   return (
-    <header className='py-1'>
+    <header
+      className={`py-1 sticky top-0 bg-base-100 z-100 transition-shadow duration-200 ${
+        isScrolled ? 'shadow-md' : 'shadow-none'
+      }`}>
       <Container>
         <nav className='navbar'>
           {/* Navbar Start */}
