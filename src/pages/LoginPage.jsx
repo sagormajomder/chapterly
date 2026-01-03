@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { Link, useLocation, useNavigate } from 'react-router';
@@ -7,24 +8,35 @@ import GoogleLogin from '../components/GoogleLogin';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const { signInUser, setIsLoading } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  function handleUserLogin(e) {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm();
 
+  const watchedPassword = useWatch({
+    control,
+    name: 'password',
+    defaultValue: '',
+  });
+
+  function handleUserLogin(data) {
+    const { email, password } = data;
     signInUser(email, password)
       .then(userCredential => {
         toast.success('user log in successfully!');
 
         // Clear info
-        setEmail('');
-        setPassword('');
+        reset();
 
         navigate(location.state ?? '/');
       })
@@ -57,6 +69,11 @@ export default function LoginPage() {
         setIsLoading(false);
       });
   }
+
+  function handleDemoLogin() {
+    setValue('email', 'demo@gmail.com', { shouldValidate: true });
+    setValue('password', 'Demo01%', { shouldValidate: true });
+  }
   return (
     <>
       <title>Chapterly - User Login</title>
@@ -69,7 +86,7 @@ export default function LoginPage() {
               alt=''
             />
             <div className='card-body basis-1/2 self-center py-10'>
-              <form onSubmit={handleUserLogin}>
+              <form onSubmit={handleSubmit(handleUserLogin)}>
                 <div className='mb-6 text-center'>
                   <h2 className='heading-secondary mb-0.5'>Welcome Back</h2>
                   <p className='text-xs'>Log in your account</p>
@@ -84,29 +101,34 @@ export default function LoginPage() {
                     type='email'
                     className='input w-full'
                     placeholder='Email'
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    required
+                    {...register('email', { required: true })}
                   />
+                  {errors.email?.type === 'required' && (
+                    <span className='text-red-400'>Email is required!</span>
+                  )}
                   {/* Password */}
                   <label htmlFor='pass' className='label'>
                     Password
                   </label>
                   <div className='relative'>
                     <input
-                      id='pass'
                       type={showPassword ? 'text' : 'password'}
-                      className='input pr-8 w-full'
+                      {...register('password', {
+                        required: true,
+                        minLength: 6,
+                        pattern:
+                          /^(?=.*[a-z])(?=.*[A-Z]).(?=.*\d).(?=.*[^A-Za-z0-9]).+$/,
+                      })}
+                      className='input w-full '
                       placeholder='Password'
-                      value={password}
-                      onChange={e => setPassword(e.target.value)}
-                      required
+                      id='pass'
                     />
-                    {password.length > 0 && (
+
+                    {watchedPassword.length > 0 && (
                       <button
                         type='button'
                         onClick={() => setShowPassword(!showPassword)}
-                        className='absolute top-1/2 right-6 z-10 -translate-y-1/2 cursor-pointer text-xl'>
+                        className='absolute top-1/2 right-3 z-10 -translate-y-1/2 cursor-pointer text-xl'>
                         {showPassword ? (
                           <AiOutlineEyeInvisible />
                         ) : (
@@ -115,12 +137,33 @@ export default function LoginPage() {
                       </button>
                     )}
                   </div>
+
+                  {errors.password?.type === 'required' && (
+                    <span className='text-red-400'>Password is required!</span>
+                  )}
+                  {errors.password?.type === 'minLength' && (
+                    <span className='text-red-400'>
+                      Password must be at least 6 characters!
+                    </span>
+                  )}
+                  {errors.password?.type === 'pattern' && (
+                    <span className='text-red-400'>
+                      Password must contain at least one uppercase, one
+                      lowercase letter, one digit and one special characters!
+                    </span>
+                  )}
                   <div>
                     <a className='link link-hover hover:text-accent'>
                       Forgot password?
                     </a>
                   </div>
                   <button className='btn btn-primary mt-4'>Login</button>
+                  <button
+                    type='button'
+                    onClick={handleDemoLogin}
+                    className='btn btn-primary btn-outline mt-4'>
+                    Demo Credentials (User)
+                  </button>
                 </fieldset>
               </form>
               <div className='divider'>OR</div>

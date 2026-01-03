@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router';
@@ -7,30 +8,36 @@ import { useAuth } from '../contexts/AuthContext';
 import Container from './../components/Container';
 
 export default function RegistrationPage() {
-  const [displayName, setDisplayName] = useState('');
-  const [photoURL, setPhotoURL] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [displayName, setDisplayName] = useState('');
+  // const [photoURL, setPhotoURL] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const { createUser, updateUserProfile, setIsLoading } = useAuth();
 
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const watchedPassword = useWatch({
+    control,
+    name: 'password',
+    defaultValue: '',
+  });
+
   const navigate = useNavigate();
 
-  function handleUserRegister(e) {
-    e.preventDefault();
+  function handleUserRegister(data) {
+    const { displayName, photoURL, email, password } = data;
 
     // Password validation using single regex
     // (?=.*[a-z]) - at least one lowercase letter
     // (?=.*[A-Z]) - at least one uppercase letter
     // .{6,} - at least 6 characters
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-
-    if (!passwordRegex.test(password)) {
-      toast.error(
-        'Password must be at least 6 characters and contain both uppercase and lowercase letters'
-      );
-      return;
-    }
 
     createUser(email, password)
       .then(userCredential => {
@@ -41,10 +48,7 @@ export default function RegistrationPage() {
             // console.log(userCredential);
 
             // Clear Values
-            setDisplayName('');
-            setPhotoURL('');
-            setEmail('');
-            setPassword('');
+            reset();
 
             navigate('/');
           })
@@ -90,7 +94,7 @@ export default function RegistrationPage() {
             />
 
             <div className='card-body basis-1/2 self-center py-10'>
-              <form onSubmit={handleUserRegister}>
+              <form onSubmit={handleSubmit(handleUserRegister)}>
                 <h2 className='heading-secondary text-center mb-6'>
                   Open a New Chapter <br /> with Chapter
                   <span className='font-bold text-primary'>ly.</span>
@@ -105,10 +109,11 @@ export default function RegistrationPage() {
                     type='text'
                     className='input w-full'
                     placeholder='Name'
-                    value={displayName}
-                    onChange={e => setDisplayName(e.target.value)}
-                    required
+                    {...register('displayName', { required: true })}
                   />
+                  {errors.displayName?.type === 'required' && (
+                    <span className='text-red-400'>Name is required!</span>
+                  )}
                   {/* PhotoUrl */}
                   <label htmlFor='photo' className='label'>
                     PhotoURL
@@ -118,10 +123,11 @@ export default function RegistrationPage() {
                     type='text'
                     className='input w-full'
                     placeholder='PhotoURL'
-                    value={photoURL}
-                    onChange={e => setPhotoURL(e.target.value)}
-                    required
+                    {...register('photoURL', { required: true })}
                   />
+                  {errors.photoURL?.type === 'required' && (
+                    <span className='text-red-400'>PhotoURL is required!</span>
+                  )}
                   {/* Email */}
                   <label htmlFor='email' className='label'>
                     Email
@@ -131,25 +137,30 @@ export default function RegistrationPage() {
                     type='email'
                     className='input w-full'
                     placeholder='Email'
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    required
+                    {...register('email', { required: true })}
                   />
+                  {errors.email?.type === 'required' && (
+                    <span className='text-red-400'>Email is required!</span>
+                  )}
                   {/* Password */}
                   <label htmlFor='pass' className='label'>
                     Password
                   </label>
                   <div className='relative'>
                     <input
-                      id='pass'
                       type={showPassword ? 'text' : 'password'}
-                      className='input pr-10 w-full'
+                      {...register('password', {
+                        required: true,
+                        minLength: 6,
+                        pattern:
+                          /^(?=.*[a-z])(?=.*[A-Z]).(?=.*\d).(?=.*[^A-Za-z0-9]).+$/,
+                      })}
+                      className='input w-full '
                       placeholder='Password'
-                      value={password}
-                      onChange={e => setPassword(e.target.value)}
-                      required
+                      id='pass'
                     />
-                    {password.length > 0 && (
+
+                    {watchedPassword.length > 0 && (
                       <button
                         type='button'
                         onClick={() => setShowPassword(!showPassword)}
@@ -162,10 +173,21 @@ export default function RegistrationPage() {
                       </button>
                     )}
                   </div>
-                  <p className='mt-1 text-gray-500 text-xs'>
-                    Password length must be at least 6 chararacter, must have
-                    both lower (a-z) and upper case letters (A-Z)
-                  </p>
+
+                  {errors.password?.type === 'required' && (
+                    <span className='text-red-400'>Password is required!</span>
+                  )}
+                  {errors.password?.type === 'minLength' && (
+                    <span className='text-red-400'>
+                      Password must be at least 6 characters!
+                    </span>
+                  )}
+                  {errors.password?.type === 'pattern' && (
+                    <span className='text-red-400'>
+                      Password must contain at least one uppercase, one
+                      lowercase letter, one digit and one special characters!
+                    </span>
+                  )}
 
                   <button className='btn btn-primary mt-4'>Register</button>
                 </fieldset>
