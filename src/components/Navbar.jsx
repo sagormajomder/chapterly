@@ -147,7 +147,9 @@ export default function Navbar() {
                           tabIndex='-1'
                           className='dropdown-content menu bg-base-100 rounded-box z-1 w-40 p-2 shadow-sm space-y-2'>
                           <li>
-                            <NavLink to='/dashboard'>Dashboard</NavLink>
+                            <NavLink to='/dashboard/add-book'>
+                              Dashboard
+                            </NavLink>
                           </li>
                           <li>
                             <button
@@ -232,7 +234,7 @@ export default function Navbar() {
                     tabIndex='-1'
                     className='dropdown-content menu bg-base-100 rounded-box z-1 w-fit p-2 shadow-sm space-y-2'>
                     <li>
-                      <NavLink to='/dashboard'>Dashboard</NavLink>
+                      <NavLink to='/dashboard/add-book'>Dashboard</NavLink>
                     </li>
                     <button onClick={handleLogOut} className='btn  btn-primary'>
                       LogOut

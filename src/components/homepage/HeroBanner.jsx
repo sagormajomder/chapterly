@@ -25,7 +25,7 @@ export default function HeroBanner() {
           </Link>
           <Link
             className='btn btn-outline border border-primary hover:bg-primary hover:text-primary-content'
-            to='/add-book'>
+            to='/dashboard/add-book'>
             Add Book
           </Link>
         </div>
