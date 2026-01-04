@@ -50,9 +50,9 @@ export default function AddBookPage() {
         setImage('');
         setSummary('');
 
-        navigate('/my-books');
+        navigate('/dashboard/my-books');
       } else {
-        toast.error('Some error occured!');
+        toast.error('Some error occurred!');
       }
     });
   }

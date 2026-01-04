@@ -54,7 +54,7 @@ export default function UpdateBookPage() {
         setUpdateCoverImage('');
         setUpdateSummary('');
 
-        navigate('/my-books');
+        navigate('/dashboard/my-books');
       } else {
         toast.error('Some error occured!');
       }
