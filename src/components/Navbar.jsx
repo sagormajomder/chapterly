@@ -46,10 +46,10 @@ export default function Navbar() {
         <NavLink to='/all-books'>All Books</NavLink>
       </li>
       <li>
-        <NavLink to='/add-book'>Add Book</NavLink>
+        <NavLink to='/about-us'>About Us</NavLink>
       </li>
       <li>
-        <NavLink to='/my-books'>My Books</NavLink>
+        <NavLink to='/contact-us'>Contact Us</NavLink>
       </li>
     </>
   );
