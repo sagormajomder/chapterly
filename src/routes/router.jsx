@@ -5,6 +5,7 @@ import DashboardLayout from '../layouts/DashboardLayout';
 import RootLayout from '../layouts/RootLayout';
 import AboutUsPage from '../pages/AboutUsPage';
 import BookDetailsPage from '../pages/BookDetailsPage';
+import ContactUsPage from '../pages/ContactUsPage';
 import ErrorPage from '../pages/ErrorPage';
 import UpdateBookPage from '../pages/UpdateBookPage';
 import AddBookPage from './../pages/AddBookPage';
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'contact-us',
-        element: <BookDetailsPage />,
+        Component: ContactUsPage,
       },
 
       // Auth
